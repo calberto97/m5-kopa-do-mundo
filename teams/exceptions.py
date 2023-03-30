@@ -11,8 +11,6 @@ class InvalidYearCupError(Exception):
 
 
 class ImpossibleTitlesError(Exception):
-    def __init__(
-        self, message="impossible to have more titles than disputed cups"
-    ):
+    def __init__(self, message="impossible to have more titles than disputed cups"):
         super().__init__(message)
         self.message = message

@@ -35,12 +35,12 @@ def data_processing(national_squad: dict):
         print(f"{err.__class__.__name__}: {err.message}")
 
 
-data = {
-    "name": "França",
-    "titles": -9,
-    "top_scorer": "Zidane",
-    "fifa_code": "FRA",
-    "first_cup": "2002-10-18",
-}
+# data = {
+#     "name": "França",
+#     "titles": -9,
+#     "top_scorer": "Zidane",
+#     "fifa_code": "FRA",
+#     "first_cup": "2002-10-18",
+# }
 
-print(data_processing(data))
+# print(data_processing(data))
