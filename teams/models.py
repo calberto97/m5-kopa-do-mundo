@@ -9,5 +9,4 @@ class Team(models.Model):
     first_cup = models.DateField(null=True)
 
     def __repr__(self) -> str:
-        # return super().__repr__()
         return f'<{self.pk} {self.name} - {self.fifa_code}>'
