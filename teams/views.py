@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.forms.models import model_to_dict
@@ -26,7 +25,6 @@ class TeamsView(APIView):
             InvalidYearCupError,
             ImpossibleTitlesError,
         ) as err:
-            # return Response(f"{err.__class__.__name__}: {err.message}")
             return Response({"error": err.message}, 400)
 
     def get(self, request):
@@ -38,3 +36,37 @@ class TeamsView(APIView):
             data_dict.append(e)
 
         return Response(data_dict, 200)
+
+
+class TeamView(APIView):
+    def get(self, request, team_id):
+        try:
+            team = Team.objects.get(pk=team_id)
+        except Team.DoesNotExist:
+            return Response({"message": "Team not found"}, 404)
+
+        team_dict = model_to_dict(team)
+        return Response(team_dict, 200)
+
+    def patch(self, request, team_id):
+        try:
+            team = Team.objects.get(pk=team_id)
+        except Team.DoesNotExist:
+            return Response({"message": "Team not found"}, 404)
+
+        for key, value in request.data.items():
+            setattr(team, key, value)
+        team.id = team_id
+        team.save()
+
+        team_dict = model_to_dict(team)
+        return Response(team_dict, 200)
+
+    def delete(self, request, team_id):
+        try:
+            team = Team.objects.get(pk=team_id)
+        except Team.DoesNotExist:
+            return Response({"message": "Team not found"}, 404)
+
+        team.delete()
+        return Response(status=204)

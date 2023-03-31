@@ -7,7 +7,6 @@ from teams.exceptions import (
 
 
 def data_processing(national_squad: dict):
-    # try:
     if national_squad["titles"] < 0:
         raise NegativeTitlesError()
 
@@ -27,9 +26,3 @@ def data_processing(national_squad: dict):
     possible_titles = (datetime.now().year - nation_first_cup) / 4
     if national_squad["titles"] > possible_titles:
         raise ImpossibleTitlesError
-    # except (
-    #     NegativeTitlesError,
-    #     InvalidYearCupError,
-    #     ImpossibleTitlesError,
-    # ) as err:
-        # print(f"{err.__class__.__name__}: {err.message}")
