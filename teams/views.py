@@ -13,6 +13,8 @@ from teams.exceptions import (
 class TeamsView(APIView):
     def post(self, request):
         payload = request.data
+        if payload.get("id"):
+            payload.pop("id")
         try:
             data_processing(payload)
 
